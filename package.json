@@ -1,0 +1,31 @@
+{
+  "name": "bert",
+  "version": "1.0.0",
+  "description": "serverside initiated clientside templating",
+  "main": "bert.js",
+  "scripts": {
+    "build": "node .\\node_modules\\gulp\\bin\\gulp.js build",
+    "dev": "node .\\node_modules\\gulp\\bin\\gulp.js dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seriousManual/bert.git"
+  },
+  "keywords": [
+    "templating"
+  ],
+  "author": " <seriousstuff@gmx.de>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/seriousManual/bert/issues"
+  },
+  "homepage": "https://github.com/seriousManual/bert#readme",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-browserify": "^0.5.1",
+    "gulp-util": "^3.0.6",
+    "rimraf": "^2.4.2",
+    "run-sequence": "^1.1.2"
+  }
+}

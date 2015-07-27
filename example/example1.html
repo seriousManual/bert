@@ -1,0 +1,35 @@
+<html>
+<head>
+    <title>bert</title>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="../build/bert.js"></script>
+</head>
+<body>
+
+<h1>Testcenter</h1>
+
+<div class="person" bert-entity>
+    Firstname: <span bert-property="firstName">Bert</span><br>
+    Familyname: <span bert-property="familyName">Hold</span>
+
+    <h2>Hobbies</h2>
+    <ul bert-list bert-list-property="hobbies">
+        <li>
+            <span bert-property="title">Swimming</span>
+            Skill: <span bert-property="skill">Medium</span>
+        </li>
+        <li>
+            <span bert-property="title">Running</span>
+            Skill: <span bert-property="skill">Beginner</span>
+        </li>
+        <li>
+            <span bert-property="title">Coding</span>
+            Skill: <span bert-property="skill">Pro</span>
+        </li>
+    </ul>
+</div>
+
+<script type="text/javascript" src="example1.js"></script>
+</body>
+</html>
