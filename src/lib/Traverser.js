@@ -30,9 +30,10 @@ Traverser.prototype._handleProperty = function (node, context) {
 };
 
 Traverser.prototype._handleList = function (node, context) {
+    var children = node.children;
     var propertyName = node.getAttribute(tokens.LIST_PROPERTY);
-    var listOfChildEntities = this._handleListOfEntities(node.children);
-    var myList = new List(node, listOfChildEntities[0]);
+    var listOfChildEntities = this._handleListOfEntities(children);
+    var myList = new List(node, children[0], this);
 
     listOfChildEntities.forEach(function(child) {
         myList.addChild(child);

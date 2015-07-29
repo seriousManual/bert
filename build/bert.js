@@ -9,9 +9,10 @@ module.exports = function(initialNode) {
 },{"./lib/Traverser":5}],2:[function(_dereq_,module,exports){
 var Model = _dereq_('./Model');
 
-function List(parentNode, stencil) {
+function List(parentNode, stencil, traverser) {
     this._parentNode = parentNode;
     this._stencil = stencil;
+    this._traverser = traverser;
 
     this._children = [];
 }
@@ -38,14 +39,16 @@ List.prototype.del = function(index) {
 };
 
 List.prototype.add = function(data) {
-    //var clone = this._stencil.cloneNode(true);
-    //var newElement = new Model(clone);
-    //newElement.applyData(data);
-    //
-    //this._children.push(newElement);
-    //this._parentNode.appendChild(newElement.getNode());
-    //
-    //return newElement;
+    var clone = this._stencil.cloneNode(true);
+    var newElement = new Model(clone);
+
+    this._traverser._traverseNode(clone, newElement);
+    newElement.applyData(data);
+
+    this._children.push(newElement);
+    this._parentNode.appendChild(newElement.getNode());
+
+    return newElement;
 };
 
 module.exports = List;
@@ -132,9 +135,10 @@ Traverser.prototype._handleProperty = function (node, context) {
 };
 
 Traverser.prototype._handleList = function (node, context) {
+    var children = node.children;
     var propertyName = node.getAttribute(tokens.LIST_PROPERTY);
-    var listOfChildEntities = this._handleListOfEntities(node.children);
-    var myList = new List(node, listOfChildEntities[0]);
+    var listOfChildEntities = this._handleListOfEntities(children);
+    var myList = new List(node, children[0], this);
 
     listOfChildEntities.forEach(function(child) {
         myList.addChild(child);

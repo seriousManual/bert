@@ -15,12 +15,19 @@ console.timeEnd('propertyGet');
 console.log(e1.hobbies.get(0).getTitle());
 console.log(e1.hobbies.get(0).getSkill());
 
-console.time('setByData');
+console.time('applyData');
 e1.hobbies.get(2).applyData({
     title: 'fooTitle',
     skill: 'fooSkill'
 });
-console.timeEnd('setByData');
+console.timeEnd('applyData');
+
+console.time('newEntry');
+e1.hobbies.add({
+    title: 'newnewTitle',
+    skill: 'newnewSkill'
+});
+console.timeEnd('newEntry');
 
 setTimeout(function() {
     console.time('propertySet');
@@ -43,7 +50,7 @@ setTimeout(function() {
 
 setTimeout(function() {
     e1.hobbies.add({
-        title: 'foo',
-        skill: 'bar'
+        title: 'newTitle',
+        skill: 'newSkill'
     });
 }, 4000);

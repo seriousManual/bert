@@ -1,8 +1,9 @@
 var Model = require('./Model');
 
-function List(parentNode, stencil) {
+function List(parentNode, stencil, traverser) {
     this._parentNode = parentNode;
     this._stencil = stencil;
+    this._traverser = traverser;
 
     this._children = [];
 }
@@ -29,14 +30,16 @@ List.prototype.del = function(index) {
 };
 
 List.prototype.add = function(data) {
-    //var clone = this._stencil.cloneNode(true);
-    //var newElement = new Model(clone);
-    //newElement.applyData(data);
-    //
-    //this._children.push(newElement);
-    //this._parentNode.appendChild(newElement.getNode());
-    //
-    //return newElement;
+    var clone = this._stencil.cloneNode(true);
+    var newElement = new Model(clone);
+
+    this._traverser._traverseNode(clone, newElement);
+    newElement.applyData(data);
+
+    this._children.push(newElement);
+    this._parentNode.appendChild(newElement.getNode());
+
+    return newElement;
 };
 
 module.exports = List;
