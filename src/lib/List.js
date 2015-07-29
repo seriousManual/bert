@@ -1,10 +1,15 @@
-var tools = require('./tools');
+var Model = require('./Model');
 
-function List(children, $parentNode, stencil) {
-    this._children = children;
-    this._$parentNode = $parentNode;
-    this._$stencil = stencil;
+function List(parentNode, stencil) {
+    this._parentNode = parentNode;
+    this._stencil = stencil;
+
+    this._children = [];
 }
+
+List.prototype.addChild = function(child) {
+    this._children.push(child);
+};
 
 List.prototype.all = function() {
     return this._children;
@@ -18,22 +23,20 @@ List.prototype.del = function(index) {
     var deleteElement = this._children[index];
     this._children.splice(index, 1);
 
-    deleteElement.getNode().remove();
+    this._parentNode.removeChild(deleteElement.getNode());
 
     return deleteElement;
 };
 
 List.prototype.add = function(data) {
-    var Model = require('./Model');
-
-    var $clone = this._$stencil.clone();
-    var newElement = new Model($clone);
-    newElement.applyData(data);
-
-    this._children.push(newElement);
-    this._$parentNode.append(newElement.getNode());
-
-    return newElement;
+    //var clone = this._stencil.cloneNode(true);
+    //var newElement = new Model(clone);
+    //newElement.applyData(data);
+    //
+    //this._children.push(newElement);
+    //this._parentNode.appendChild(newElement.getNode());
+    //
+    //return newElement;
 };
 
 module.exports = List;

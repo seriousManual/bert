@@ -1,29 +1,49 @@
-var bertApp = bert('body');
+console.time('setup');
+var bertApp = bert();
+console.timeEnd('setup');
 
 var e1 = bertApp[0];
 
+console.time('propertyGet');
 console.log(e1.getFirstName());
+console.timeEnd('propertyGet');
+
+console.time('propertyGet');
 console.log(e1.getFamilyName());
+console.timeEnd('propertyGet');
+
+console.log(e1.hobbies.get(0).getTitle());
+console.log(e1.hobbies.get(0).getSkill());
+
+console.time('setByData');
+e1.hobbies.get(2).applyData({
+    title: 'fooTitle',
+    skill: 'fooSkill'
+});
+console.timeEnd('setByData');
 
 setTimeout(function() {
-    e1.setFirstName('foo');
+    console.time('propertySet');
+    e1.setFirstName('foo111');
+    console.timeEnd('propertySet');
+
     e1.setFamilyName('bar');
 }, 1000);
 
 setTimeout(function() {
+    console.time('deletion');
     e1.hobbies.del(0);
+    console.timeEnd('deletion');
 }, 2000);
+
+setTimeout(function() {
+    e1.hobbies.get(1).setTitle('newTitle');
+    e1.hobbies.get(1).setSkill('newSkill');
+}, 3000);
 
 setTimeout(function() {
     e1.hobbies.add({
         title: 'foo',
         skill: 'bar'
     });
-}, 3000);
-
-//console.log(e1.hobbies.get(0).getTitle());
-//console.log(bertApp.hobbies.get(0).getSkill());
-//console.log(bertApp.hobbies.get(1).setTitle('newTitle'));
-//console.log(bertApp.hobbies.get(1).setSkill('newSkill'));
-
-//e1.hobbies.del(0);
+}, 4000);

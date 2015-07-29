@@ -1,12 +1,7 @@
-var Model = require('./lib/Model');
-console.log(Model);
+var Traverser = require('./lib/Traverser');
+
 module.exports = function(initialNode) {
-    var $initialNode = $(initialNode);
+    var t = new Traverser();
 
-    var entities = [];
-    $('[bert-entity]', $initialNode).each(function(index, entityNode) {
-        entities.push(new Model(entityNode));
-    });
-
-    return entities;
+    return t.getEntities();
 };
